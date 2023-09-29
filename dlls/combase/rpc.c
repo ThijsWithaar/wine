@@ -1369,6 +1369,7 @@ static HRESULT WINAPI ClientRpcChannelBuffer_SendReceive(LPRPCCHANNELBUFFER ifac
     struct tlsdata *tlsdata;
 
     TRACE("%p, iMethod %ld\n", olemsg, olemsg->iMethod);
+    /*Hack*/ if(olemsg->iMethod == 32772) return RPC_E_WRONG_THREAD;
 
     hr = ClientRpcChannelBuffer_IsCorrectApartment(This, apt);
     if (hr != S_OK)

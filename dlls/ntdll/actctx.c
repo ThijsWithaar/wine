@@ -2770,6 +2770,10 @@ static void parse_assembly_elem( xmlbuf_t *xmlbuf, struct assembly* assembly,
         {
             parse_assembly_identity_elem(xmlbuf, acl->actctx, &assembly->id, &elem);
 
+            if (!assembly->directory && (assembly->type == ASSEMBLY_MANIFEST || assembly->type == ASSEMBLY_SHARED_MANIFEST ) ){
+                assembly->directory = build_assembly_dir(&assembly->id);
+                TRACE("Assembly directory generated  %ls \n", assembly->directory);
+            }
             if (!xmlbuf->error && expected_ai)
             {
                 /* FIXME: more tests */
